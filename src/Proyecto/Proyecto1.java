@@ -26,6 +26,7 @@ public class Proyecto1 extends GraphicsProgram{
 		matrizPuntos[19][16] = "195,169";
 		matrizPuntos[21][17] = "215,185"; 
 		matrizPuntos[22][20] = "232,199";
+		matrizPuntos[23][42] = "200,320";
 		for (int x=1;x<76;x++){
 			for (int y=1;y<67;y++){
 				if(matrizPuntos[x][y]!=""&& matrizPuntos[x][y]!=null){
