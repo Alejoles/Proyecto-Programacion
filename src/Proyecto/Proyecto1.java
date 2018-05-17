@@ -16,6 +16,7 @@ public class Proyecto1 extends GraphicsProgram{
 		mapa();
 		
 	}
+	//----------------------------------------------MAPA---------------------------------------------------
 	private void mapa (){
 		setSize(768,672);
 		add(new GImage("/home/acer/Escritorio/WhatsApp Image 2018-04-27 at 12.05.48 PM.jpeg"));
