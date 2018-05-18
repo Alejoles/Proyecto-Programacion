@@ -24,7 +24,7 @@ public class Tareapunto2 extends ConsoleProgram{
 	public void texto() {
 		Scanner file = null;
 		try {
-		file = new Scanner(new File("/home/acer/Escritorio/Numrs"));
+		file = new Scanner(new File("/home/acer/Escritorio/Trabajos/Numrs"));
 			while(file.hasNext()) {
 				numeros = file.nextInt();
 				sale = numeros + sale;

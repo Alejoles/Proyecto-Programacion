@@ -28,13 +28,13 @@ public class Proyecto1 extends GraphicsProgram{
 		matrizPuntos[21][17] = "215,185"; 
 		matrizPuntos[22][20] = "232,199";
 		matrizPuntos[20][32] = "200,320";
+		matrizPuntos[18][16] = "185,160";
 		for (int x=1;x<76;x++){
 			for (int y=1;y<67;y++){
 				if(matrizPuntos[x][y]!=""&& matrizPuntos[x][y]!=null){
 					GOval a  =new GOval(
 							Integer.parseInt(matrizPuntos[x][y].split(",")[0]), 
-							Integer.parseInt(matrizPuntos[x][y].split(",")[1])
-									,8,8); 
+							Integer.parseInt(matrizPuntos[x][y].split(",")[1]),8,8); 
 							add (a);
 							
 				}
