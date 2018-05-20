@@ -92,6 +92,10 @@ public class Proyecto1 extends GraphicsProgram{
 		matrizPuntos[31][27] = "310,270";
 		matrizPuntos[32][26] = "320,260";
 		matrizPuntos[33][25] = "330,250";//interseccion cll9 == abajo
+		matrizPuntos[34][26] = "340,260";
+		matrizPuntos[35][27] = "350,270";
+		matrizPuntos[32][24] = "320,240";
+		matrizPuntos[31][23] = "310,230";
 		matrizPuntos[29][20] = "290,200";
 		matrizPuntos[28][19] = "280,190";
 		matrizPuntos[30][21] = "300,210";
@@ -154,7 +158,7 @@ public class Proyecto1 extends GraphicsProgram{
 		matrizPuntos[26][2] = "260,20";
 		matrizPuntos[25][1] = "250,10";
 		matrizPuntos[35][11] = "350,110";
-		matrizPuntos[36][12] = "360,120";//
+		matrizPuntos[36][12] = "360,120";
 		matrizPuntos[35][13] = "350,130";
 		matrizPuntos[34][14] = "340,140";
 		matrizPuntos[33][15] = "330,150";
@@ -180,6 +184,10 @@ public class Proyecto1 extends GraphicsProgram{
 		matrizPuntos[42][13] = "420,130";
 		matrizPuntos[43][13] = "430,130";
 		matrizPuntos[43][12] = "430,120";
+		matrizPuntos[39][15] = "390,150";
+		matrizPuntos[39][16] = "390,160";
+		matrizPuntos[39][17] = "390,170";
+		matrizPuntos[39][18] = "390,180";//al lado de bomberos otra calle
 
 		matrizPuntos[39][10] = "390,100";
 		matrizPuntos[39][9] = "390,90";
@@ -199,8 +207,6 @@ public class Proyecto1 extends GraphicsProgram{
 		matrizPuntos[43][2] = "430,20";
 		matrizPuntos[44][3] = "440,30";
 		matrizPuntos[45][3] = "450,30";
-
-
 		matrizPuntos[28][12] = "280,120";
 		matrizPuntos[27][12] = "270,120";
 		matrizPuntos[26][13] = "260,130";
@@ -211,9 +217,15 @@ public class Proyecto1 extends GraphicsProgram{
 		matrizPuntos[29][17] = "290,170";
 		matrizPuntos[28][18] = "280,180";
 		matrizPuntos[32][16] = "320,160";
-		matrizPuntos[33][17] = "330,170";//interseccion bomberos
+		matrizPuntos[33][17] = "330,170";
+		matrizPuntos[32][18] = "320,180";
+		matrizPuntos[31][19] = "310,190";
+		matrizPuntos[30][20] = "300,200";
+		matrizPuntos[34][17] = "340,170";
+		matrizPuntos[35][16] = "350,160";
+		matrizPuntos[36][15] = "360,150";
+		matrizPuntos[37][14] = "370,140";
 
-		
 		
 		for (int x=1;x<76;x++){
 			for (int y=1;y<67;y++){
