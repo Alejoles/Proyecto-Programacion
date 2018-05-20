@@ -64,8 +64,19 @@ public class Proyecto1 extends GraphicsProgram{
 		matrizPuntos[11][52] = "110,520";
 		matrizPuntos[10][53] = "100,530";
 		matrizPuntos[9][53] = "90,530";
-		matrizPuntos[8][54] = "80,540";
-		matrizPuntos[7][55] = "70,550";
+		matrizPuntos[8][53] = "80,530";
+		matrizPuntos[7][54] = "70,540";
+		matrizPuntos[6][54] = "60,540";
+		matrizPuntos[5][55] = "50,550";
+		matrizPuntos[4][56] = "40,560";
+		matrizPuntos[3][56] = "30,560";
+		matrizPuntos[2][57] = "20,570";
+		matrizPuntos[1][57] = "10,570";
+		matrizPuntos[4][57] = "40,570";
+		matrizPuntos[5][58] = "50,580";
+		matrizPuntos[5][59] = "50,590";
+		matrizPuntos[6][60] = "60,600";
+		matrizPuntos[7][61] = "70,610";
 
 		matrizPuntos[21][41] = "210,410";
 		matrizPuntos[22][40] = "220,400";
