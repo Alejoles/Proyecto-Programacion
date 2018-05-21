@@ -1,27 +1,24 @@
 package Proyecto;
-
 import acm.graphics.*;
-
 import acm.program.*;
-
 import java.awt.*;
-
 import java.awt.event.*;
 
+public class Proyecto1 extends GraphicsProgram {
 
-public class Proyecto1 extends GraphicsProgram{
-
-	private static final long serialVersionUID = 1L;
-	public void run (){
-		mapa();
-		
-	}
-	//----------------------------------------------MAPA---------------------------------------------------
-	private void mapa (){
-		setSize(768,672);
-		add(new GImage("/home/acer/Escritorio/WhatsApp Image 2018-04-27 at 12.05.48 PM.jpeg"));
-		String matrizPuntos [][] = new String [76][67];
-		matrizPuntos[16][37] = "169,370";
+public void  run() {
+	   //funcion que permite controlar el click del mouse
+	   addMouseListeners();
+	   
+	   setSize(768,672);
+	   add(new GImage("/home/acer/Escritorio/WhatsApp Image 2018-04-27 at 12.05.48 PM.jpeg"));
+	   
+	   /**	Creacion de la matriz: 
+	    * 		Tendra 76 posiciones en x dado que la imagen es de 768 pixeles de ancho (cada 10 pixeles es una posicion adicional en la matriz)
+	    * 		Tendra 67 posciones en y dado que la imagen es de 672 pixeles de alto (cada 10 pixeles es una posicion adicional en la matriz)
+	    * */ 
+	
+	   matrizPuntos[16][37] = "169,370";
 		matrizPuntos[16][36] = "168,360";
 		matrizPuntos[16][35] = "169,350";
 		matrizPuntos[16][34] = "169,340";
@@ -421,17 +418,348 @@ public class Proyecto1 extends GraphicsProgram{
 		matrizPuntos[36][15] = "360,150";
 		matrizPuntos[37][14] = "370,140";
 
-		
-		for (int x=1;x<76;x++){
-			for (int y=1;y<67;y++){
-				if(matrizPuntos[x][y]!=""&& matrizPuntos[x][y]!=null){
-					GOval a  =new GOval(
-							Integer.parseInt(matrizPuntos[x][y].split(",")[0]), 
-							Integer.parseInt(matrizPuntos[x][y].split(",")[1]),8,8); 
-							add (a);
-							
-				}
-			}
-		}
-	}
+	
+	   //Label calcular
+	   GLabel LabelCalcular = new GLabel("Calcular",10,100);
+	   //Label que muestra un mensaje en pantalla
+	   GLabel labelError = new GLabel("",100,10);
+
+	   //funcion que captura el click sobre el boton calcular
+	   LabelCalcular.addMouseListener(new MouseAdapter() {
+		    @Override
+		    public void mouseClicked(MouseEvent arg0) {
+		        
+		    	
+		    	// Acá entra solo cuando se de click sobre el boton calcular
+		    	
+		    	//Validamos si ya se ha escogido un punto inicial y un punto final antes de empezar a buscar la ruta
+		    	if(puntoInicial==0 || puntofinal==0 )
+		    	{
+		    		//muestra en pantalla el mensaje
+		    		labelError.setLabel("Debe hacer click dos veces para elegir el punto inicial y final respectivamente");
+		    		return;
+		    	}
+		    	
+		    	//Toma el punto x en pantalla de la posicion inicial y lo divide en 10  para transformarlo en la posicion X de la matriz de puntos
+		    	int xInicial=(int)xi/10;
+		    	//Toma el punto y en pantalla de la posicion inicial y lo divide en 10  para transformarlo en la posicion y de la matriz de puntos
+		    	int yinicial=(int)yi/10;
+		    	//Toma el punto x en pantalla de la posicion final y lo divide en 10  para transformarlo en la posicion X de la matriz de puntos
+		    	xFinal=(int)xf/10;
+		    	//Toma el punto y en pantalla de la posicion final y lo divide en 10  para transformarlo en la posicion y de la matriz de puntos
+		    	yFinal=(int)yf/10;
+		    	
+		    	
+		    	//validamos si el punto inicial existe en la matriz 
+		    	if(matrizPuntos[xInicial][yinicial] == null)
+		    	{
+		    		//si no esta el punto, mira el mas cercano arriba
+		    		if(matrizPuntos[xInicial-1][yinicial] != null)
+		    		{
+		    			//cambia la posicion inicial si existe el punto en la matriz
+		    			xInicial=xInicial-1;
+		    		}
+		    		//si no esta el punto, mira el mas cercano abajo
+		    		else if(matrizPuntos[xInicial+1][yinicial] != null)
+		    		{
+		    			//cambia la posicion inicial si existe el punto en la matriz
+		    			xInicial=xInicial+1;
+		    		}
+		    		//si no esta el punto, mira el mas cercano izquierda
+		    		else if(matrizPuntos[xInicial][yinicial-1] != null)
+		    		{
+		    			//cambia la posicion inicial si existe el punto en la matriz
+		    			yinicial=yinicial-1;
+		    		}
+		    		//si no esta el punto, mira el mas cercano derecha
+		    		else if(matrizPuntos[xInicial][yinicial+1] != null)
+		    		{
+		    			//cambia la posicion inicial si existe el punto en la matriz
+		    			yinicial=yinicial+1;
+		    		}
+		    		//si no esta el punto, mira el mas cercano izquierda arriba
+		    		else if(matrizPuntos[xInicial-1][yinicial-1] != null)
+		    		{
+		    			//cambia la posicion inicial si existe el punto en la matriz
+		    			xInicial=xInicial-1;
+		    			yinicial=yinicial-1;
+		    		}
+		    		//si no esta el punto, mira el mas cercano derecha arriba
+		    		else if(matrizPuntos[xInicial-1][yinicial+1] != null)
+		    		{
+		    			//cambia la posicion inicial si existe el punto en la matriz
+		    			xInicial=xInicial-1;
+		    			yinicial=yinicial+1;	
+		    		}
+		    		//si no esta el punto, mira el mas cercano derecha abajo
+		    		else if(matrizPuntos[xInicial+1][yinicial+1] != null)
+		    		{
+		    			//cambia la posicion inicial si existe el punto en la matriz
+		    			xInicial=xInicial+1;
+		    			yinicial=yinicial+1;
+		    		}
+		    		//si no esta el punto, mira el mas cercano izquierda abajo
+		    		else if(matrizPuntos[xInicial+1][yinicial-1] != null)
+		    		{
+		    			//cambia la posicion inicial si existe el punto en la matriz
+		    			xInicial=xInicial+1;
+		    			yinicial=yinicial-1;
+		    		}
+		    		else
+		    		{
+		    		//si no encuentra un punto cercano valida arroja el mensaje que el punto inicial es invalido
+		    		labelError.setLabel("El punto inicial no es valido "+xi+" "+yi);
+		    		return;
+		    		}
+		    	}
+		    	
+		    	//se hace la misma validacion anterior pero con el punto final
+		    	if(matrizPuntos[xFinal][yFinal] == null)
+			    {
+		    		if(matrizPuntos[xFinal-1][yFinal] != null)
+		    		{
+		    			xFinal=xFinal-1;
+		    		}
+		    		else if(matrizPuntos[xFinal+1][yFinal] != null)
+		    		{
+		    			xFinal=xFinal+1;
+		    		}
+		    		else if(matrizPuntos[xFinal][yFinal-1] != null)
+		    		{
+		    			yFinal=yFinal-1;
+		    		}
+		    		else if(matrizPuntos[xFinal][yFinal+1] != null)
+		    		{
+		    			yFinal=yFinal+1;
+		    		}
+		    		
+		    		else if(matrizPuntos[xFinal-1][yFinal-1] != null)
+		    		{
+		    			xFinal=xFinal-1;
+		    			yFinal=yFinal-1;
+		    		}
+		    		else if(matrizPuntos[xFinal-1][yFinal+1] != null)
+		    		{
+		    			xFinal=xFinal-1;
+		    			yFinal=yFinal+1;
+		    		}
+		    		else if(matrizPuntos[xFinal+1][yFinal+1] != null)
+		    		{
+		    			xFinal=xFinal+1;
+		    			yFinal=yFinal+1;
+		    		}
+		    		else if(matrizPuntos[xFinal+1][yFinal-1] != null)
+		    		{
+		    			xFinal=xFinal+1;
+		    			yFinal=yFinal-1;
+		    		}
+		    		
+		    		else
+		    		{
+		    			labelError.setLabel("El punto final no es valido "+xf+" "+yf);
+		    			return;
+		    		}
+		    	}
+		    	
+		    	//si se encontraron los dos puntos se imprime que los puntos son validos
+		    	labelError.setLabel("Los puntos son validos");
+
+		    	
+		    	//empezamos a busscar en el sentido de las manecillas del reloj, se invoca la funcion buscar ruta en cada direccion, esta funcion es recursiva
+		    	
+		    	//Buscar arriba
+		    	buscarRuta(xInicial-1,yinicial);
+		    	//Buscar arriba-derecha
+		    	if(encontrado==0)
+		    		buscarRuta(xInicial-1,yinicial+1);
+		    	//Buscar derecha
+		    	if(encontrado==0)
+		    		buscarRuta(xInicial,yinicial+1);
+		    	//Buscar abajo-derecha
+		    	if(encontrado==0)
+		    		buscarRuta(xInicial+1,yinicial+1);
+		    	//Buscar abajo
+		    	if(encontrado==0)
+		    		buscarRuta(xInicial+1,yinicial);
+		    	//Buscar abajo-izquierda
+		    	if(encontrado==0)
+		    		buscarRuta(xInicial+1,yinicial-1);
+		    	//buscar izquierda
+		    	if(encontrado==0)
+		    		buscarRuta(xInicial,yinicial-1);
+		    	//buscar arriba - izquierda
+		    	if(encontrado==0)
+		    		buscarRuta(xInicial-1,yinicial-1);
+		    	
+		    	// se recorre el arreglo que guardo los puntos buscados
+		    	for(int i=0;i<5092;i++)
+	    		   {
+		    		   //si en la posicion del arreglo existe algo lo imprime en pantalla
+	    			   if(arregloRuta[i]!="" && arregloRuta[i] != null)
+	    			   {
+	    				   //imprime punto a punto la solucion encontrada
+	    				   GOval a =new GOval(
+	    						   Integer.parseInt(arregloRuta[i].split(",")[0]),
+	    						   Integer.parseInt(arregloRuta[i].split(",")[1])
+	    						   		,8,8);
+	    				   add(a);
+	    			   }
+	    			   //sai ya no hay mas puntos termina la impresion
+	    			   else  if(arregloRuta[i]==null)
+	    			      break;
+	    			   
+	    		   }
+		    		
+		    }
+		});
+	   
+	   //agrega a la pantalla el boton label "calcular"
+	   add(LabelCalcular);
+	   //agrega a la pantalla el boton label que me permite mostrar mensajes en pantalla
+	   add(labelError);
+
+}
+
+//funcion recursiva que se llama a si misma para ir buscando la ruta de un punto a otro, hasta encontrar el punto final
+public void buscarRuta(int x, int y)
+{
+	   //valido si ya encontrè el punto final
+	   if(x==xFinal && y==yFinal)
+	   {
+		   encontrado=1;
+		   arregloRuta[indiceRuta]=matrizPuntos[x][y];
+	   }
+	   else
+	   {
+		   //valido si el punto buscado existe en la matriz
+		   if(matrizPuntos[x][y]!="" && matrizPuntos[x][y] != null)
+		   {
+			   int Nodoyaencontrado=0;
+			   //recorro el arreglo de la solcuion, para no agregar puntos repetidos
+			   for(int i=0;i<5092;i++)
+ 		   {
+				   //valido el final del arreglo solucion
+ 			   if(arregloRuta[i]!="" && arregloRuta[i] != null)
+ 			   {
+ 				   //si el nodo ya lo habia ingresado en el arreglo solucion rompo la busqueda para que la funcion recursiva busque por otro camino
+ 				   if(arregloRuta[i]==matrizPuntos[x][y])
+ 				   {
+ 					   Nodoyaencontrado=Nodoyaencontrado+1;
+ 					   return;
+ 				   }
+ 			   }
+ 			   else
+ 				   break;
+ 			   
+ 		   }
+			   
+			   //solo si es un punto nuevo lo agrego al vector solucion
+			   if(Nodoyaencontrado==0)
+			   {
+				   //agrego el punto al vector solucion
+				   arregloRuta[indiceRuta]=matrizPuntos[x][y];
+				   //incremento en 1 la posicion del vector solucion para agregar un nuevo punto la proxima vez que la funcion recursiva encuentre un punto candidato
+				   indiceRuta=indiceRuta+1;
+			   }
+		   }
+		   else
+		   {
+			  //si no existe el punto rompo la busqueda para valdiar otro camino 
+			  return; 
+		   }
+		   
+	   }
+	   
+	   
+	   //de aqui hacia abajo invoco de manera recursiva (llamado asi mismo de la funcion buscar ruta) hasta encontrar el punto final
+	   
+	   //Buscar arriba
+	   if(encontrado==0)
+	   	   buscarRuta(x-1,y);
+	   	//Buscar arriba-derecha
+		if(encontrado==0)
+			buscarRuta(x-1,y+1);
+		//Buscar derecha
+		if(encontrado==0)
+			buscarRuta(x,y+1);
+		//Buscar abajo-derecha
+		if(encontrado==0)
+			buscarRuta(x+1,y+1);
+		//Buscar abajo
+		if(encontrado==0)
+			buscarRuta(x+1,y);
+		//Buscar abajo-izquierda
+		if(encontrado==0)
+			buscarRuta(x+1,y-1);
+		//buscar izquierda
+		if(encontrado==0)
+			buscarRuta(x,y-1);
+		//buscar arriba - izquierda
+		if(encontrado==0)
+			buscarRuta(x-1,y-1);
+	
+		return;
+}
+
+
+//declaracionde variables globales
+
+//controla la posicion del vector solucion
+int indiceRuta=0;
+//almacena la posicion  x del punto final
+int xFinal=0;
+//ALMACENA LA POSICION y del punto final
+int yFinal=0;
+// flag que almacena cuando ya se haya encontrado la solucion
+int encontrado=0;
+//Arreglo solucion
+String arregloRuta[] = new String[5092];
+
+//matriz de todos los puntos del mapa
+String matrizPuntos[][] = new String[76][67];
+
+//valida si se ha agregado un punto inicial
+int puntoInicial=0;
+
+//valida si se ha agregado un punto final
+int puntofinal=0;
+
+//almacena los pixeles en x y y de la posicion inicial
+double xi=0;
+double yi=0;
+
+//almacena los pixeles en x y y de la posicion final
+double xf=0;
+double yf=0;
+
+//captura el evento click sobre el mapa para captrurar las posiciones inicial y final
+public void mousePressed(MouseEvent e) {
+    
+	   //si es e primer click guarda la posicion inicial
+	   if(puntoInicial==0)
+    {
+ 	   puntoInicial=1;
+ 	   xi = e.getX();
+ 	   yi = e.getY();
+    
+ 	   //pinta en rojo el punto inicial
+ 	   GOval a =new GOval(xi,yi,8,8);
+ 	   a.setFilled(true);
+ 	   a.setFillColor(Color.RED);
+ 	   add(a);
+    }
+	   //si por el contrario ya ha guardado la posicion inicial, sigue con la posicion final
+    else if(puntofinal==0)
+    {
+ 	   puntofinal=1;
+ 	   xf = e.getX();
+ 	   yf = e.getY();
+    
+ 	   //pinta en azul el punto final
+ 	   GOval af =new GOval(xf,yf,8,8);
+ 	   af.setFilled(true);
+ 	   af.setFillColor(Color.BLUE);
+ 	   add(af);
+    }
+}
 }
