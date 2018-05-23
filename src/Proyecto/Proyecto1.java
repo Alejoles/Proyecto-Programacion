@@ -11,7 +11,7 @@ public void  run() {
 	   addMouseListeners();
 	   
 	   setSize(768,672);
-	   add(new GImage("/home/acer/Escritorio/WhatsApp Image 2018-04-27 at 12.05.48 PM.jpeg"));
+	   add(new GImage("WhatsApp Image 2018-04-27 at 12.05.48 PM.jpeg"));
 	   
 	   /**	Creacion de la matriz: 
 	    * 		Tendra 76 posiciones en x dado que la imagen es de 768 pixeles de ancho (cada 10 pixeles es una posicion adicional en la matriz)
